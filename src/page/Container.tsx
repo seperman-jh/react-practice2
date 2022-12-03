@@ -1,5 +1,10 @@
 import React from "react";
 
+type list = {
+    name        : string
+    datetime    : string
+}
+
 
 function Container () {
 
@@ -26,13 +31,13 @@ function Container () {
 
     return (
         <>
-            <ul className="Container">
+            <ul className="container">
                 {
-                    list.map((t, i) => (
-                            <li key={i}>
-                                {}
-                                {t.datetime}
-                            </li>
+                    list.map((t:list, i) => (
+                        <li key={i}>
+                            <div className="name">{t.name}</div>
+                            <div className="datetime">{t.datetime}</div>
+                        </li>
                     ))
                 }
             </ul>

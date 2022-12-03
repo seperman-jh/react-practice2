@@ -3,8 +3,8 @@
 function Header () {
     return (
         <>
-            <div className="Head">
-                hello
+            <div className="header">
+                Blog
             </div>
         </>
     )

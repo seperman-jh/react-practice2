@@ -38,7 +38,7 @@ table {
 }
 
 
-.Head {
+.header {
     background:#000;
     font-size:20px;
     color:#fff;
@@ -46,9 +46,19 @@ table {
     padding:20px 10px;
 }
 
-.Container li {
+.container li {
     display:flex;
     flex-direction: column;
     padding:20px 10px;
     border-bottom:1px solid #000;
 }
+
+.container li .name {
+    margin:10px 0 15px 0;
+}
+
+.container li .datetime {
+
+}
+
+
