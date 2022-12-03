@@ -55,10 +55,22 @@ table {
 
 .container li .name {
     margin:10px 0 15px 0;
+    cursor:pointer;
+}
+
+.container li .name .like {
+    margin-left:10px;
+    cursor:pointer;
+}
+
+.container li .name .like_count {
+    margin-left:5px;
 }
 
 .container li .datetime {
 
 }
+
+
 
 
