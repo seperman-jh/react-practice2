@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 
 type list = {
     name        : string
-    datetime    : string
+    datetime    : any
 }
 
 interface pp {
@@ -37,12 +37,27 @@ function Container () {
     const [current, setCurrent] = useState(0);
     const [list, setList] = useState(dummy);
     const [like, setLike] = useState([0,1,2]);
+    const inputRef = useRef <HTMLInputElement>(null);
+
+    const [input, setInput] = useState("");
 
 
     const likeHandler =  (i:number) => {
+
+
+        console.log(i);
+
        let liked    = [...like];
-       liked[i]     = liked[i] + 1;
+
+        liked[i] = liked[i]+1;
+       //liked[i] = liked[i] ? liked[i] + 1 : 0;
+
+        console.log(liked);
+
        setLike( liked);
+
+
+
     }
 
 
@@ -53,9 +68,35 @@ function Container () {
         setList(listed);
     }
 
+
+    const deleteListHandler = (i: number) => {
+        //let listed = list.filter((list, seq)=> seq !== i );
+
+        let listed = [...list];
+        listed.splice(i,1);
+        setList(listed);
+
+    }
+
+    const addListHandler = (data : string) => {
+
+        let datetime  = new Date();
+
+
+        let added : list = {name:data, datetime:datetime.getMilliseconds()};
+
+        setList([added, ...list])
+        setLike([0, ...like]);
+
+    }
+
+    // @ts-ignore
+
     return (
 
         <>
+
+
             <ul className="container">
                 {
                     list ?
@@ -70,6 +111,8 @@ function Container () {
                                     }
                                 >
                                     {t.name}
+                                    <br />
+                                    {t.datetime}
                                     <span
                                         className="like"
                                         onClick={()=>likeHandler(i)}
@@ -77,12 +120,37 @@ function Container () {
                                     👍
                                         <span className="like_count">{like[i]}</span>
                                     </span>
+
+                                    <button
+                                         onClick={()=>deleteListHandler(i)}
+                                    > 삭제 </button>
                                 </div>
                             </li>
                         ))
                     : ""
                 }
             </ul>
+
+
+            <input
+                ref = {inputRef}
+                onChange ={(e)=>setInput(e.target.value)}
+            />
+            <button
+
+                onClick = {() => {
+
+                    if(input != ""){
+                        addListHandler(input);
+                        //inputRef?.current.value
+                    }else{
+                        alert("한글자라도 입력")
+                    }
+
+                }}
+            > button </button>
+
+
 
             { modalOn ?
                 <Modal
